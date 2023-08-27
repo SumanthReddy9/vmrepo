@@ -224,6 +224,7 @@ if __name__ == "__main__":
     data_processed = data.copy()
     data_processed = model.label_encoder(data_processed)
     all_predictions = model.predict(data_processed.drop(columns=[target_column]))
+    all_predictions = ['Yes' if x == 1 else 'No' for x in all_predictions]
     data[target_column + '_prediction'] = all_predictions
     os.makedirs('output', exist_ok=True)
     data.to_csv('output/results.csv', index=False)
